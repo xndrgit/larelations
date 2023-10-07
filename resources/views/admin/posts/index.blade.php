@@ -20,6 +20,7 @@
         <table class="table table-dark table-hover table-responsive">
             <thead class="thead-dark">
             <tr>
+                <th>Author</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Image</th>
@@ -31,6 +32,7 @@
             <tbody>
             @foreach($posts as $post)
                 <tr>
+                    <td>{{ $post->user->name }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
                     <td>
