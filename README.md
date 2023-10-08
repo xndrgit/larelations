@@ -1,23 +1,72 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+## 1-to-1 Relationship: User and UserDetails
+Each user has one set of user details.
+### Step 1: Database Migration ###
+Ensure your database tables are properly structured.
+### Step 2: Create the Migration ###
+`add_user_id_to_user_details_table.php`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    public function up()
+    {
+        Schema::table('user_details', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id'); // Add user_id column
+            $table->foreign('user_id')->references('id')->on('users'); // Add foreign key constraint
+        });
+    }
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    public function down()
+    {
+        Schema::table('user_details', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Remove foreign key constraint
+            $table->dropColumn('user_id'); // Remove user_id column
+        });
+    }
+
+Run php artisan migrate to apply the migration.
+
+### Step 3: Define the Relationship in Models ###
+```
+
+class UserDetails extends Model
+{
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+
+class User extends Model
+{
+    public function userDetails()
+    {
+        return $this->hasOne(UserDetails::class);
+    }
+}
+```
+
+### Step 4: Using the Relationship ###
+Retrieve a User's UserDetails
+
+```
+$user = User::find(1);
+$userDetails = $user->userDetails; // Get the associated user details
+
+// Access user details data
+echo $userDetails->address;
+```
+Retrieve the User of UserDetails
+```
+$userDetails = UserDetails::find(1);
+$user = $userDetails->user; // Get the associated user
+
+// Access user data
+echo $user->name;
+```
+
+
+
+
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
