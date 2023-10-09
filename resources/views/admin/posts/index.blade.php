@@ -32,7 +32,7 @@
             <tbody>
             @foreach($posts as $post)
                 <tr>
-                    <td>{{ $post->user->name }}</td>
+                    <td>{{ $post->user->name }} {{$post->user->userDetail->last_name}}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
                     <td>
