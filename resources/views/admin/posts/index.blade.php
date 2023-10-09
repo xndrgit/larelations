@@ -23,6 +23,7 @@
                 <th>Author</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th>Category</th>
                 <th>Image</th>
                 <th>Published</th>
                 <!-- <th>Published At</th> -->
@@ -35,6 +36,11 @@
                     <td>{{ $post->user->name }} {{$post->user->userDetail->last_name}}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
+                    <td>
+                        <div class="badge-pill" style="background-color: {{$post->category->color}}">
+                            {{ $post->category->name }}
+                        </div>
+                    </td>
                     <td>
                         @if($post->image)
                             <img src="{{ $post->image }}" alt="Post Image" style="max-width: 100px;">

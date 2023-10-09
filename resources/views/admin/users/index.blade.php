@@ -18,7 +18,7 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Phone Number</th>
-                <th>Actions</th> <!-- Add Actions column if needed -->
+{{--                <th>Actions</th> <!-- Add Actions column if needed -->--}}
             </tr>
             </thead>
             <tbody>

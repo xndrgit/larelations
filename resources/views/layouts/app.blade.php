@@ -38,6 +38,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
+                            </li>
                         @endguest
 
                     </ul>
