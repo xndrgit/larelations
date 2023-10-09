@@ -13,6 +13,12 @@ class UsersTableSeeder extends Seeder
     public function run(Faker $faker)
     {
 
+        $myUser = new \App\User();
+        $myUser->name = 'xndr';
+        $myUser->email = 'mymails.xander@gmail.com';
+        $myUser->password = \Illuminate\Support\Facades\Hash::make('0');
+        $myUser->save();
+
         $numberOfUsers = 10;
         for ($i = 0; $i < $numberOfUsers; $i++) {
 
