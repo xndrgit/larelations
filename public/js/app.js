@@ -7041,6 +7041,8 @@
             );
 
 
+
+
 // Note: an element does not contain itself
             jQuery.contains = function (a, b) {
                 var bup = b && b.parentNode;
@@ -7054,6 +7056,8 @@
                         a.compareDocumentPosition && a.compareDocumentPosition(bup) & 16
                 ));
             };
+
+
 
 
 // CSS string/identifier serialization
@@ -9211,6 +9215,7 @@
             var rsingleTag = (/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i);
 
 
+
 // Implement the identical functionality for filter and not
             function winnow(elements, qualifier, not) {
                 if (isFunction(qualifier)) {
@@ -10323,6 +10328,8 @@
                 // A fallback to window.onload, that will always work
                 window.addEventListener("load", completed);
             }
+
+
 
 
 // Multifunctional method to get and set values of a collection
@@ -14932,12 +14939,15 @@
             });
 
 
+
+
 // Return jQuery for attributes-only inclusion
             var location = window.location;
 
             var nonce = {guid: Date.now()};
 
             var rquery = (/\?/);
+
 
 
 // Cross-browser xml parsing
@@ -16394,6 +16404,8 @@
             });
 
 
+
+
 // Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
             jQuery.ajaxPrefilter(function (s) {
                 if (s.crossDomain) {
@@ -16551,6 +16563,8 @@
                     return "script";
                 }
             });
+
+
 
 
 // Support: Safari 8 only
@@ -17007,6 +17021,8 @@
             );
 
 
+
+
 // Support: Android <=4.0 only
 // Make sure we trim BOM and NBSP
 // Require that the "whitespace run" starts from a non-whitespace
@@ -17080,6 +17096,7 @@
                     "" :
                     (text + "").replace(rtrim, "$1");
             };
+
 
 
 // Register as a named AMD module, since jQuery can be concatenated with other
@@ -39770,7 +39787,6 @@
                 }
                 return baseObj;
             }
-
 // helper to dynamically append modifier runtime markers to event names.
 // ensure only append when value is already string, otherwise it will be cast
 // to string and cause the type check to miss.
