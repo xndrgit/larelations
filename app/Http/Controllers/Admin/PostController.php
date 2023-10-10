@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', ['categories' => $categories]);
     }
 
 
@@ -62,6 +64,7 @@ class PostController extends Controller
 // Create a new post with manual values
         $post = new Post;
         $post->user_id = Auth::id();
+        $post->category_id = $request->input('category');
         $post->title = $request->input('title');
         $post->content = $request->input('content');
 // $post->author = auth()->user()->name; // Set author as the authenticated user's name
@@ -102,10 +105,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-
+        $categories = Category::all();
 
 // Pass the post data to the show view
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
 
@@ -118,6 +121,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
 // Validate the request data
         $request->validate($this->validationRules);
 
@@ -125,9 +129,10 @@ class PostController extends Controller
 // Find the post
         $post = Post::findOrFail($id);
 
-
 // Update the post with manual values
         $post->user_id = $post->user_id;
+        $post->category_id = $request->input('category');
+
         $post->title = $request->input('title');
         $post->content = $request->input('content');
 // $post->author = auth()->user()->name; // Set author as the authenticated user's name
@@ -138,7 +143,7 @@ class PostController extends Controller
         $post->save();
 
 
-        return redirect()->route('admin.posts.show', $post->id)->with('success', 'Post updated successfully.');
+        return redirect()->route('admin.posts.index', $post->id)->with('success', 'Post updated successfully.');
     }
 
 

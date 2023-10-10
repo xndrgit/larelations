@@ -23,6 +23,8 @@
                                 No Image
                             @endif
                         </div>
+                        <div class="badge-pill text-center"
+                             style="background-color: {{$post->category->color}}">{{ $post->category->name }}</div>
                         <p>{{ $post->content }}</p>
                         <p><strong>Published:</strong> {{ $post->published ? 'Yes' : 'No' }}</p>
                         <p><strong>Published At:</strong> {{ $post->published_at }}</p>

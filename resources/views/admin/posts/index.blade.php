@@ -37,9 +37,13 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
                     <td>
-                        <div class="badge-pill" style="background-color: {{$post->category->color}}">
-                            {{ $post->category->name }}
-                        </div>
+                        @if($post->category)
+                            <div class="badge-pill" style="background-color: {{ $post->category->color }}">
+                                {{ $post->category->name }}
+                            </div>
+                        @else
+                            No Category
+                        @endif
                     </td>
                     <td>
                         @if($post->image)
