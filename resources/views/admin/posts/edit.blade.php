@@ -44,8 +44,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="image">Image:</label>
-                                <textarea class="form-control @error('image') is-invalid @enderror" id="image"
-                                          name="image">{{ old('image', $post->image) }}</textarea>
+                                <input class="form-control @error('image') is-invalid @enderror" id="image"
+                                       name="image" value="{{ old('image', $post->image) }}">
                                 @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

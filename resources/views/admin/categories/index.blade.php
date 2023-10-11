@@ -31,7 +31,12 @@
                     <td>{{ $category->description ?? 'N/A' }}</td>
                     <td>
                         @if($category->color)
-                            <div style="background-color: {{ $category->color }}; width: 30px; height: 30px;"></div>
+                            @if(preg_match('/^#[A-Fa-f0-9]{6}$/', $category->color))
+                                <div style="background-color: {{ $category->color }}; width: 30px; height: 30px;"></div>
+                            @else
+                                <span
+                                    class="font-weight-bolder text-danger">Invalid Color Format: {{ $category->color }}</span>
+                            @endif
                         @else
                             N/A
                         @endif

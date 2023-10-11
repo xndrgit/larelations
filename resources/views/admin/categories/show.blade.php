@@ -26,7 +26,12 @@
                     <dt class="col-sm-3">Color:</dt>
                     <dd class="col-sm-9">
                         @if($category->color)
-                            <div style="background-color: {{ $category->color }}; width: 50px; height: 30px;"></div>
+                            @if(preg_match('/^#[A-Fa-f0-9]{6}$/', $category->color))
+                                <div style="background-color: {{ $category->color }}; width: 30px; height: 30px;"></div>
+                            @else
+                                <span
+                                    class="font-weight-bolder text-danger">Invalid Color Format: {{ $category->color }}</span>
+                            @endif
                         @else
                             N/A
                         @endif
@@ -34,13 +39,17 @@
                 </dl>
             </div>
             <div class="card-footer">
-                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-link"
+                   title="Edit Category">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
                 <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
                       style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('Are you sure you want to delete this category?')">Delete
+                    <button type="submit" class="btn btn-link" title="Delete Post"
+                            onclick="return confirm('Are you sure you want to delete this post?')">
+                        <i class="fas fa-trash-alt"></i> Delete
                     </button>
                 </form>
             </div>
@@ -53,14 +62,15 @@
 
             @if ($category->post->count() > 0)
 
-                <div class="d-flex">
+                <div class="d-flex justify-content-between flex-wrap col-12">
                     @foreach ($category->post as $post)
-                        <div href="{{ route('admin.posts.show', $post->id) }}" class="card m-2">
+                        <div class="card col-3 m-4">
                             <div class="card-header">
-                                {{$post->title}}
+                                <a href="{{ route('admin.posts.show', $post->id) }}">{{$post->title}}</a>
                             </div>
-                            <div class="card-body">
-                                <img width="100" height="100" alt="post_image_{{$post->id}}" src="{{$post->image}}">
+                            <div class="card-body d-flex justify-content-center align-items-center">
+                                <img class="img-fluid" width="100" height="100" alt="post_image_{{$post->id}}"
+                                     src="{{$post->image}}">
                             </div>
                         </div>
                     @endforeach

@@ -67,6 +67,7 @@ class PostController extends Controller
         $post->category_id = $request->input('category');
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->image = $request->input('image');
 // $post->author = auth()->user()->name; // Set author as the authenticated user's name
         $post->published_at = now(); // Set published_at as the current datetime
         $post->published = true; // Set published as true
@@ -135,6 +136,8 @@ class PostController extends Controller
 
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->image = $request->input('image');
+
 // $post->author = auth()->user()->name; // Set author as the authenticated user's name
         $post->published_at = $post->published_at; // Set published_at as the old date time
         $post->published = true; // Set published as true
