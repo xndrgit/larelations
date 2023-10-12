@@ -30,6 +30,7 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/home', 'HomeController@index')->name('home');
         Route::resource('posts', 'PostController');
+        Route::patch('/posts/{id}/deleteFromCategory', 'PostController@deleteFromCategory')->name('posts.deleteFromCategory');
         Route::resource('users', 'UserController');
         Route::resource('categories', 'CategoryController');
 

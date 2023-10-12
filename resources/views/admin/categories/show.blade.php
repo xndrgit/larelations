@@ -72,6 +72,17 @@
                                 <img class="img-fluid" width="100" height="100" alt="post_image_{{$post->id}}"
                                      src="{{$post->image}}">
                             </div>
+                            <div class="card-footer">
+                                <form action="{{ route('admin.posts.deleteFromCategory', $post->id) }}" method="POST"
+                                      style="display: inline;">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-link" title="Delete Category From Post"
+                                            onclick="return confirm('Are you sure you want to delete this post from this category?')">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 </div>

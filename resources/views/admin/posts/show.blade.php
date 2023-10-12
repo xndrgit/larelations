@@ -23,8 +23,16 @@
                                 No Image
                             @endif
                         </div>
-                        <div class="badge-pill text-center"
-                             style="background-color: {{$post->category->color}}">{{ $post->category->name }}</div>
+                        @isset($post->category->color)
+                            <div class="badge-pill text-center"
+                                 style="background-color: {{$post->category->color}}">
+                                {{ $post->category->name }}
+                            </div>
+                        @else
+                            <div class="badge-pill text-center">
+                                N/A
+                            </div>
+                        @endif
                         <p>{{ $post->content }}</p>
                         <p><strong>Published:</strong> {{ $post->published ? 'Yes' : 'No' }}</p>
                         <p><strong>Published At:</strong> {{ $post->published_at }}</p>
