@@ -68,9 +68,14 @@
                             <div class="card-header">
                                 <a href="{{ route('admin.posts.show', $post->id) }}">{{$post->title}}</a>
                             </div>
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <img class="img-fluid" width="100" height="100" alt="post_image_{{$post->id}}"
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                <img class="img-fluid " width="100" height="100" alt="post_image_{{$post->id}}"
                                      src="{{$post->image}}">
+                                {{$post->user->name}}
+                                @foreach ($post->user->roles as $role)
+                                    <div class="badge-pill"
+                                         style="background-color: {{$category->color}}">{{ $role->name }}</div>
+                                @endforeach
                             </div>
                             <div class="card-footer">
                                 <form action="{{ route('admin.posts.deleteFromCategory', $post->id) }}" method="POST"

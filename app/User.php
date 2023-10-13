@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\UserDetail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function userDetail()
     {
         return $this->hasOne(UserDetail::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 
 }
