@@ -20,7 +20,8 @@ class AddForeignUserIdOnPostsTable extends Migration
             // Add a foreign key constraint that references the 'id' column of the 'users' table
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade'); // This specifies that when a user is deleted, related posts will be cascaded (deleted)
         });
     }
 
