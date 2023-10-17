@@ -1,4 +1,14 @@
+# Laravel 7 Pagination with paginate()
+`$users = User::paginate(5);`
 
+```
+{{-- View --}}
+@foreach ($users as $user)
+    <!-- Display user information -->
+@endforeach
+
+{{ $users->links() }}
+```
 
 # 1-to-1 Relationship: User and UserDetails
 Each user has one set of user details.
