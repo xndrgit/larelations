@@ -2,10 +2,12 @@
 
 ## Step 1: Configure Filesystem 
 In your filesystems.php configuration file, set the default filesystem driver to 'public':
+
 `'default' => env('FILESYSTEM_DRIVER', 'public'),`
 
 ## Step 2: Create a Symbolic Link
 Create a symbolic link to your storage directory by running the following Artisan command:
+
 `php artisan storage:link`
 
 ## Step 3: Modify Your Form
@@ -28,6 +30,7 @@ In your edit form view (e.g., edit.blade.php), add enctype="multipart/form-data"
 ```
 ## Step 4: Update Your Controller
 In your controller's update method, handle the image upload and update the post. You can use the store method from the Storage facade:
+
 ```
   // Handle image upload
     if ($request->hasFile('image')) {
@@ -38,6 +41,7 @@ In your controller's update method, handle the image upload and update the post.
 ```
 
 ## Step 5: Display the Image
+
 ```
     @if($post->image)
         <img class="img-fluid w-25" src="{{ asset('storage/' . $post->image) }}" alt="Uploaded File">
