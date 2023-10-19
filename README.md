@@ -26,8 +26,25 @@ In your edit form view (e.g., edit.blade.php), add enctype="multipart/form-data"
     <!-- submit button and closing tags -->
 </form>
 ```
+## Step 4: Update Your Controller
+In your controller's update method, handle the image upload and update the post. You can use the store method from the Storage facade:
+```
+  // Handle image upload
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('uploads', 'public');
+        // Store the image path in the database
+        $post->image = $imagePath;
+    }
+```
 
-
+## Step 5: Display the Image
+```
+    @if($post->image)
+        <img class="img-fluid w-25" src="{{ asset('storage/' . $post->image) }}" alt="Uploaded File">
+    @else
+        No Image
+    @endif
+```
 
 # Laravel 7 Pagination with paginate()
 `$users = User::paginate(5);`
