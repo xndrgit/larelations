@@ -369,6 +369,22 @@ MAIL_PASSWORD=your-mailtrap-password
 MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=your-email@example.com
 MAIL_FROM_NAME="${APP_NAME}"
+
+##########################################
+##########################################
+##########################################
+
+
+create prject security application with ur google account
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=mymails.xander@gmail.com
+MAIL_PASSWORD=vpjqewhbcgxhxwod
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=tunissansfrontier@gmail.com
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 
