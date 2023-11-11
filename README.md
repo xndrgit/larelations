@@ -250,3 +250,136 @@ attach($ids, $attributes = []): This method is used to attach one or more relate
 detach($ids = null): This method is used to detach related models from the current model. It removes rows from the intermediate pivot table. For example, to remove roles from a user, you can use detach with role IDs.
 
 sync($ids, $detaching = true): This method is used to synchronize the related models. It will attach the specified IDs and detach any IDs not in the given array. The $detaching parameter controls whether to detach any IDs that are not in the array. This is useful when you want to completely replace the related data with a new set of data.
+
+
+
+
+
+
+
+# Step 1: Install Guzzle
+
+```
+composer require guzzlehttp/guzzle
+composer dump-autoload
+```
+
+Step 2: Create a Model
+
+```
+php artisan make:model Models/Lead
+```
+
+Step 3: Create a Migration for Leads
+```
+php artisan make:migration create_leads_table
+php artisan migrate
+```
+
+Step 4: Create a Controller
+```
+php artisan make:controller Api/ContactController
+
+
+// app/Http/Controllers/Api/ContactController.php
+
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Mail\NewContactForm;
+use App\Models\Lead;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+class ContactController extends Controller
+{
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $newLead = new Lead();
+
+        $newLead->name = $data['name'];
+        $newLead->email = $data['email'];
+        $newLead->message = $data['message'];
+        $newLead->save();
+
+        Mail::to('your-mailtrap-email@example.com')->send(new NewContactForm($newLead));
+
+        return response()->json([
+            'message' => 'Contact form submitted successfully',
+            'payload' => $newLead,
+        ]);
+    }
+}
+
+```
+
+
+
+Step 5: Create Api Route
+```
+Route::namespace('Api')->group(function () {
+    Route::get('posts', 'PostController@index');
+    Route::get('posts/{id}', 'PostController@show');
+    // Add more routes for creating, updating, and deleting posts as needed
+
+    Route::get('categories', 'CategoryController@index');
+    Route::get('categories/{id}', 'CategoryController@show');
+
+    Route::post('contacts', 'ContactController@store');
+});
+```
+
+Step 5: Create a Mail View
+views -> mails -> new_contact.blade.php
+
+```
+<!-- resources/views/emails/new_contact.blade.php -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Contact Form Submission</title>
+</head>
+<body>
+    <h2>New Contact Form Submission</h2>
+
+    <p><strong>Name:</strong> {{ $lead->name }}</p>
+    <p><strong>Email:</strong> {{ $lead->email }}</p>
+    <p><strong>Message:</strong> {{ $lead->message }}</p>
+
+    <p>Thank you for using our contact form!</p>
+</body>
+</html>
+
+```
+
+Step 6: Configure Mailtrap in .env
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your-mailtrap-username
+MAIL_PASSWORD=your-mailtrap-password
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=your-email@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
