@@ -264,19 +264,19 @@ composer require guzzlehttp/guzzle
 composer dump-autoload
 ```
 
-Step 2: Create a Model
+# Step 2: Create a Model
 
 ```
 php artisan make:model Models/Lead
 ```
 
-Step 3: Create a Migration for Leads
+# Step 3: Create a Migration for Leads
 ```
 php artisan make:migration create_leads_table
 php artisan migrate
 ```
 
-Step 4: Create a Controller
+# Step 4: Create a Controller
 ```
 php artisan make:controller Api/ContactController
 
@@ -319,7 +319,7 @@ class ContactController extends Controller
 
 
 
-Step 5: Create Api Route
+# Step 5: Create Api Route
 ```
 Route::namespace('Api')->group(function () {
     Route::get('posts', 'PostController@index');
@@ -333,7 +333,7 @@ Route::namespace('Api')->group(function () {
 });
 ```
 
-Step 5: Create a Mail View
+# Step 6: Create a Mail View
 views -> mails -> new_contact.blade.php
 
 ```
@@ -359,7 +359,7 @@ views -> mails -> new_contact.blade.php
 
 ```
 
-Step 6: Configure Mailtrap in .env
+# Step 7: Configure Mailtrap in .env
 ```
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
