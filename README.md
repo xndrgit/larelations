@@ -276,6 +276,55 @@ php artisan make:migration create_leads_table
 php artisan migrate
 ```
 
+# STEP Create the Mailable Class
+```
+php artisan make:mail NewContactForm
+```
+
+```
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class NewContactForm extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    /**
+     * @var mixed
+     */
+    public $lead;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($_lead)
+    {
+        $this->lead = $_lead;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this
+            ->subject('Shinami') // Change the subject here
+            ->replyTo($this->lead->email)
+            ->view('emails.new-contact');
+    }
+}
+
+```
+
 # Step 4: Create a Controller
 ```
 php artisan make:controller Api/ContactController
