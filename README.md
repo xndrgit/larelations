@@ -371,13 +371,6 @@ class ContactController extends Controller
 # Step 5: Create Api Route
 ```
 Route::namespace('Api')->group(function () {
-    Route::get('posts', 'PostController@index');
-    Route::get('posts/{id}', 'PostController@show');
-    // Add more routes for creating, updating, and deleting posts as needed
-
-    Route::get('categories', 'CategoryController@index');
-    Route::get('categories/{id}', 'CategoryController@show');
-
     Route::post('contacts', 'ContactController@store');
 });
 ```
@@ -435,6 +428,12 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=tunissansfrontier@gmail.com
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+
+
+
+error 500 
+- can be in the.env file the MAIL_FROM_ADDRESS=your-email@example.com
+- can be the folder emails named wrong
 
 
 
